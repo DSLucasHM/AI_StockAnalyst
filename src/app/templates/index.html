@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Research Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* gray-900 */
+            color: #D1D5DB; /* gray-300 */
+        }
+        .container-bg {
+            background-color: #1F2937; /* gray-800 */
+        }
+        .input-field {
+            background-color: #374151; /* gray-700 */
+            border-color: #4B5563; /* gray-600 */
+            color: #F3F4F6; /* gray-100 */
+        }
+        .input-field:focus {
+            border-color: #60A5FA; /* blue-400 */
+            ring-color: #60A5FA;
+        }
+        .btn-primary {
+            background-color: #3B82F6; /* blue-600 */
+            color: white;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: #2563EB; /* blue-700 */
+        }
+        .btn-download {
+            background-color: #10B981; /* emerald-500 */
+        }
+        .btn-download:hover {
+            background-color: #059669; /* emerald-600 */
+        }
+        .report-card {
+            background-color: #374151; /* gray-700 */
+            border: 1px solid #4B5563; /* gray-600 */
+        }
+        .report-content h1, .report-content h2, .report-content h3 {
+            color: #E5E7EB; /* gray-200 */
+            border-bottom-color: #4B5563; /* gray-600 */
+        }
+        .report-content p {
+            color: #D1D5DB; /* gray-300 */
+        }
+        .report-content table {
+            border-color: #4B5563; /* gray-600 */
+        }
+        .report-content th {
+            background-color: #4B5563; /* gray-600 */
+            color: #F3F4F6; /* gray-100 */
+        }
+        .report-content td, .report-content th {
+            border-color: #374151; /* gray-700 */
+        }
+        .report-content pre {
+            background-color: #111827; /* gray-900 */
+            color: #E5E7EB; /* gray-200 */
+            border: 1px solid #4B5563; /* gray-600 */
+        }
+        .message-error {
+            background-color: #EF4444; /* red-500 */
+            color: white;
+        }
+        .message-info {
+            background-color: #3B82F6; /* blue-600 */
+            color: white;
+        }
+        .footer-text {
+            color: #6B7280; /* gray-500 */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 selection:bg-blue-500 selection:text-white">
+    <div class="w-full max-w-3xl container-bg shadow-2xl rounded-xl p-6 md:p-10">
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 pb-2">Stock Insights</h1>
+            <p class="text-gray-400 mt-2 text-lg">Enter stock symbols to generate an in-depth research report.</p>
+        </header>
+
+        <form method="POST" action="/" class="space-y-6 mb-8">
+            <div>
+                <label for="stocks" class="block text-sm font-medium text-gray-300 mb-1.5">Stock Symbols <span class="text-gray-500">(comma or newline separated)</span></label>
+                <textarea id="stocks" name="stocks" rows="3" class="input-field mt-1 block w-full rounded-lg shadow-sm focus:ring focus:ring-opacity-50 p-3 text-base" placeholder="e.g., PETR4, VALE3, ITUB4">{{ request.form.stocks }}</textarea>
+            </div>
+            <div>
+                <button type="submit" class="btn-primary w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-md text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-500">
+                    Generate Report
+                </button>
+            </div>
+        </form>
+
+        {% if error_message %}
+            <div class="message-error mt-6 p-4 rounded-lg text-sm shadow-lg">
+                <p class="font-semibold">Report Generation Error:</p>
+                <p>{{ error_message }}</p>
+            </div>
+        {% endif %}
+
+        {% if report_html %}
+            <div class="mt-10 pt-8 border-t border-gray-700">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-semibold text-gray-100">Generated Report</h2>
+                    {% if report_filename %}
+                        <a href="{{ url_for('download_report', filename=report_filename) }}" class="btn-primary btn-download inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-emerald-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                            Download Report (.md)
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="report-card prose prose-invert max-w-none p-5 rounded-lg overflow-x-auto shadow-lg">
+                    {{ report_html | safe }}
+                </div>
+            </div>
+        {% elif processing_message %}
+            <div class="message-info mt-6 p-4 rounded-lg text-sm shadow-lg flex items-center">
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                 <p>{{ processing_message }}</p>
+            </div>
+        {% endif %}
+    </div>
+    <footer class="text-center text-sm footer-text mt-10 pb-4">
+        Developed by @https://github.com/DSLucasHM
+    </footer>
+</body>
+</html>
+
