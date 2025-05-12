@@ -1,48 +1,45 @@
-# Use uma imagem base com Python
+# Use a base image with Python
 FROM python:3.12-slim
 
-# Define o diretório de trabalho dentro do contêiner
+# Set the working directory inside the container
 WORKDIR /app
 
-# Define variáveis de ambiente para Gunicorn e Flask
+# Set environment variables for Gunicorn and Flask
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-# Ajustado para a nova localização do app Flask
+# Updated to the new Flask app location
 ENV FLASK_APP=src.app.main:app
 ENV FLASK_ENV=production
-# A porta que o Gunicorn vai escutar DENTRO do container
+# The port Gunicorn will listen to INSIDE the container
 ENV APP_PORT=5000
-# Adiciona /app ao PYTHONPATH para que imports como `from src...` funcionem
+# Adds /app to PYTHONPATH so imports like `from src...` work
 ENV PYTHONPATH=/app
 
-# Cria um usuário não-root para rodar a aplicação (boa prática)
+# Create a non-root user to run the app (best practice)
 RUN addgroup --system app && adduser --system --group app
 
-# Copia o arquivo requirements.txt para o WORKDIR (/app)
+# Copy the requirements.txt file to the WORKDIR (/app)
 COPY requirements.txt .
 
-# Instala as dependências do projeto
+# Install project dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia o diretório src (que agora contém toda a aplicação) para /app/src
+# Copy the src directory to /app/src
 COPY src/ /app/src/
 
-# Copia outros arquivos necessários da raiz para /app (como .env_example)
-# Se .env_example foi fornecido pelo usuário, ele estará em /home/ubuntu/upload/.env_example
-# Preciso verificar se ele existe e copiá-lo. Assumindo que ele foi copiado para a raiz do projeto v3_corrected.
+# Copy other necessary root-level files to /app (like .env_example)
+# If .env_example was provided by the user, it will be at /home/ubuntu/upload/.env_example
 COPY .env_example /app/
 
-# Garante que o usuário 'app' seja dono dos arquivos da aplicação.
-# O diretório /app/src/app/reports/ será criado por src/app/main.py.
-# O usuário 'app' precisa de permissão para escrever em /app/src/app/.
+# Ensure that the 'app' user owns the application files
+# The /app/src/app/reports/ directory will be created by src/app/main.py
+# The 'app' user needs write permission in /app/src/app/
 RUN chown -R app:app /app
 USER app
 
-# Expõe a porta que o Gunicorn estará rodando
+# Expose the port where Gunicorn will be running
 EXPOSE ${APP_PORT}
 
-# Comando para rodar a aplicação com Gunicorn (forma de shell para expansão de variável)
-# Aponta para o objeto 'app' em 'src/app/main.py'
-
+# Command to run the application with Gunicorn (shell form for variable expansion)
+# Points to the 'app' object inside 'src/app/main.py'
 CMD gunicorn --bind "0.0.0.0:${APP_PORT}" --timeout 800 src.app.main:app
-
