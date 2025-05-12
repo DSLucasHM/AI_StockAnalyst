@@ -78,15 +78,15 @@ Feel free to improve the prompt, customize the process, and reach out if you hav
 ---
 
 1. **Build the Docker Image:**
-   In the project's root directory (`stock_analyst`), run:
+   In the project's root directory, run:
    ```bash
-   docker build -t stock-research-app-final .
+   docker build -t stock_analyst .
    ```
 
 2. **Run the Docker Container:**
    Make sure you have a `.env` file in the root of the project (`stock_analyst`) with your API keys.
    ```bash
-   docker run -p 5000:5000 -v "$(pwd)/src/app/reports:/app/src/app/reports" --env-file .env stock-research-app-final
+   docker run -p 5000:5000 -v "$(pwd)/src/app/reports:/app/src/app/reports" --env-file .env stock_analyst
    ```
    - `-p 5000:5000`: Maps host port to container port.
    - `-v "$(pwd)/src/app/reports:/app/src/app/reports"`: (Optional but recommended) Maps the local reports directory (`src/app/reports/` on your machine) to the corresponding container directory. Create `src/app/reports` locally if it does not exist (`mkdir -p src/app/reports`).
@@ -102,7 +102,7 @@ Feel free to improve the prompt, customize the process, and reach out if you hav
 ---
 
 1. **Create and Activate a Virtual Environment:**
-   In the root directory (`stock_analyst`):
+   In the root directory :
    ```bash
    python3 -m venv venv
    source venv/bin/activate  # Linux/macOS
@@ -119,7 +119,7 @@ Feel free to improve the prompt, customize the process, and reach out if you hav
 
 4. **Run the Flask Application:**
    The `PYTHONPATH` should include the project's root directory so that `from src...` works. `src/app/main.py` tries to adjust `sys.path` for this.
-   From the root directory (`stock_analyst`):
+   From the root directory :
    ```bash
    python src/app/main.py
    ```
@@ -131,7 +131,7 @@ Feel free to improve the prompt, customize the process, and reach out if you hav
 
 ---
 
-- **API Keys:** Essential for operation, set them in the `.env` file (e.g., `TAVILY_API_KEY`, `OPENAI_API_KEY`).
+- **API Keys:** Essential for operation, set them in the `.env` file (e.g., `TAVILY_API_KEY`, `OPENAI_API_KEY`, `LANGCHAIN_API_KEY` ).
 - **Synchronous Processing:** Report generation is synchronous.
 
 ### 🔮 Future Implementations
