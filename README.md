@@ -14,7 +14,9 @@ This project performs stock research and generates detailed reports. Reports can
 
 ### 📚 About the Project
 
-This AI-powered stock research engine uses LangChain, LangGraph, and OpenAI models for in-depth analysis. It leverages Tavily for targeted web searches and Pydantic for data integrity, processing stock symbols through an agentic workflow to generate comprehensive financial reports. The system excels at automated, data-driven research and narrative creation, highlighting its advanced AI capabilities.
+This AI-powered stock analysis system simulates in-depth conversations between virtual financial analysts. Each stock is explored through dialogues with a domain specialist connected to real-time web data and a geopolitical expert assessing global risk factors. The result is a detailed, context-rich financial report built entirely by collaborative AI agents.
+
+Technically, the system leverages LangChain, LangGraph, and OpenAI models to coordinate a multi-agent workflow. Tavily powers targeted web searches, while Pydantic ensures data integrity throughout. The architecture is modular, scalable, and optimized for automated, data-driven research and narrative generation.
 
 ---
 
