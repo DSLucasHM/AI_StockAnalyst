@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,130 +11,248 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111827; /* gray-900 */
-            color: #D1D5DB; /* gray-300 */
+            background-color: #FFFFFF; /* White background */
+            color: #262626; /* Dark Gray/Near Black for text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
+            box-sizing: border-box;
         }
         .container-bg {
-            background-color: #1F2937; /* gray-800 */
+            background-color: #FFFFFF; /* White */
+            border: 1px solid #E5E5E5; /* Light gray border */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         .input-field {
-            background-color: #374151; /* gray-700 */
-            border-color: #4B5563; /* gray-600 */
-            color: #F3F4F6; /* gray-100 */
+            background-color: #FFFFFF; /* White */
+            border: 1px solid #D1D1D1; /* Medium Gray border */
+            color: #262626; /* Dark Gray text */
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
         }
         .input-field:focus {
-            border-color: #60A5FA; /* blue-400 */
-            ring-color: #60A5FA;
+            border-color: #262626; /* Dark Gray for focus */
+            box-shadow: 0 0 0 3px rgba(38, 38, 38, 0.1);
+            outline: none;
         }
         .btn-primary {
-            background-color: #3B82F6; /* blue-600 */
-            color: white;
-            transition: background-color 0.2s ease-in-out;
+            background-color: #262626; /* Dark Gray/Near Black */
+            color: #FFFFFF; /* White */
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            border-radius: 6px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            font-size: 1rem;
         }
         .btn-primary:hover {
-            background-color: #2563EB; /* blue-700 */
+            background-color: #404040; /* Slightly Lighter Dark Gray */
+        }
+        .btn-primary:disabled {
+            background-color: #A3A3A3; /* Lighter Gray for disabled */
+            color: #737373;
+            cursor: not-allowed;
         }
         .btn-download {
-            background-color: #10B981; /* emerald-500 */
+            background-color: transparent;
+            color: #262626; /* Dark Gray/Near Black */
+            border: 1px solid #262626;
         }
         .btn-download:hover {
-            background-color: #059669; /* emerald-600 */
+            background-color: #F5F5F5; /* Very Light Gray for hover */
+            color: #262626;
         }
         .report-card {
-            background-color: #374151; /* gray-700 */
-            border: 1px solid #4B5563; /* gray-600 */
+            background-color: #FFFFFF; /* White */
+            border: 1px solid #E5E5E5; /* Light gray border */
+            border-radius: 6px;
         }
         .report-content h1, .report-content h2, .report-content h3 {
-            color: #E5E7EB; /* gray-200 */
-            border-bottom-color: #4B5563; /* gray-600 */
+            color: #262626; /* Dark Gray */
+            border-bottom: 1px solid #E5E5E5; /* Light gray */
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
         .report-content p {
-            color: #D1D5DB; /* gray-300 */
+            color: #525252; /* Medium Gray */
+            line-height: 1.6;
         }
         .report-content table {
-            border-color: #4B5563; /* gray-600 */
+            border-color: #E5E5E5; /* Light gray */
+            width: 100%;
         }
         .report-content th {
-            background-color: #4B5563; /* gray-600 */
-            color: #F3F4F6; /* gray-100 */
+            background-color: #F5F5F5; /* Very Light Gray */
+            color: #262626; /* Dark Gray */
+            padding: 0.75rem;
+            text-align: left;
         }
-        .report-content td, .report-content th {
-            border-color: #374151; /* gray-700 */
+        .report-content td {
+            padding: 0.75rem;
+            border-top: 1px solid #E5E5E5; /* Light gray */
         }
         .report-content pre {
-            background-color: #111827; /* gray-900 */
-            color: #E5E7EB; /* gray-200 */
-            border: 1px solid #4B5563; /* gray-600 */
+            background-color: #F5F5F5; /* Very Light Gray */
+            color: #262626; /* Dark Gray */
+            border: 1px solid #E5E5E5; /* Light gray */
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
         }
         .message-error {
-            background-color: #EF4444; /* red-500 */
-            color: white;
-        }
-        .message-info {
-            background-color: #3B82F6; /* blue-600 */
-            color: white;
+            background-color: #FEE2E2; /* Light Red for error */
+            color: #B91C1C; /* Dark Red */
+            border: 1px solid #FCA5A5; /* Red border */
+            border-radius: 6px;
         }
         .footer-text {
-            color: #6B7280; /* gray-500 */
+            color: #A3A3A3; /* Lighter Gray */
+            font-size: 0.875rem;
         }
+        #loading-overlay {
+            transition: opacity 0.3s ease-in-out;
+            background-color: rgba(255, 255, 255, 0.9); /* White overlay, slightly transparent */
+        }
+
+        /* Simple Spinner Loader Styles - TheCoffee.jp inspired (minimal) */
+        .spinner-loader-container {
+            width: 40px;
+            height: 40px;
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .spinner {
+            width: 100%;
+            height: 100%;
+            border: 3px solid #D1D1D1; /* Medium Gray */
+            border-top-color: #262626; /* Dark Gray/Near Black */
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .header-title {
+            color: #262626; /* Dark Gray/Near Black */
+            font-weight: 600; /* Semibold for a modern feel */
+        }
+        .header-subtitle {
+            color: #737373; /* Medium Gray */
+        }
+
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 selection:bg-blue-500 selection:text-white">
-    <div class="w-full max-w-3xl container-bg shadow-2xl rounded-xl p-6 md:p-10">
-        <header class="mb-8 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 pb-2">Stock Insights</h1>
-            <p class="text-gray-400 mt-2 text-lg">Enter stock symbols to generate an in-depth research report.</p>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 selection:bg-gray-300 selection:text-black">
+
+    <div id="loading-overlay" class="fixed inset-0 flex flex-col items-center justify-center z-50" style="display: none;">
+        <div class="spinner-loader-container">
+            <div class="spinner"></div>
+        </div>
+        <p class="text-lg text-center text-gray-700 font-medium px-4">Grab a coffee, our AI analysts are brewing up your report......</p>
+        <p class="text-sm text-gray-500 mt-2">This might take a few minutes.</p>
+    </div>
+
+    <div class="w-full max-w-2xl container-bg shadow-xl rounded-lg p-6 md:p-10">
+        <header class="mb-10 text-center">
+            <h1 class="text-3xl md:text-4xl header-title">Stock Insights</h1>
+            <p class="header-subtitle mt-2 text-md">Enter stock symbols to generate an in-depth research report.</p>
         </header>
 
-        <form method="POST" action="/" class="space-y-6 mb-8">
+        <form id="research-form" method="POST" action="/" class="space-y-6 mb-10">
             <div>
-                <label for="stocks" class="block text-sm font-medium text-gray-300 mb-1.5">Stock Symbols <span class="text-gray-500">(comma or newline separated)</span></label>
-                <textarea id="stocks" name="stocks" rows="3" class="input-field mt-1 block w-full rounded-lg shadow-sm focus:ring focus:ring-opacity-50 p-3 text-base" placeholder="e.g., PETR4, VALE3, ITUB4">{{ request.form.stocks }}</textarea>
+                <label for="stocks" class="block text-sm font-medium text-gray-700 mb-1.5">Stock Symbols <span class="text-gray-500">(comma or newline separated)</span></label>
+                <textarea id="stocks" name="stocks" rows="3" class="input-field mt-1 block w-full shadow-sm focus:ring-0" placeholder="e.g., PETR4, VALE3, ITUB4">{{ request.form.stocks }}</textarea>
             </div>
             <div>
-                <button type="submit" class="btn-primary w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-md text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-500">
+                <button id="generate-report-btn" type="submit" class="btn-primary w-full flex justify-center py-3 px-4 border border-transparent shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                     Generate Report
                 </button>
             </div>
         </form>
 
         {% if error_message %}
-            <div class="message-error mt-6 p-4 rounded-lg text-sm shadow-lg">
+            <div class="message-error mt-6 p-4 rounded-md text-sm shadow-md">
                 <p class="font-semibold">Report Generation Error:</p>
                 <p>{{ error_message }}</p>
             </div>
         {% endif %}
 
         {% if report_html %}
-            <div class="mt-10 pt-8 border-t border-gray-700">
+            <div class="mt-12 pt-8 border-t border-gray-200">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-3xl font-semibold text-gray-100">Generated Report</h2>
+                    <h2 class="text-2xl font-semibold text-gray-800">Generated Report</h2>
                     {% if report_filename %}
-                        <a href="{{ url_for('download_report', filename=report_filename) }}" class="btn-primary btn-download inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-emerald-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <a href="{{ url_for('download_report', filename=report_filename) }}" class="btn-primary btn-download inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
                             </svg>
                             Download Report (.md)
                         </a>
                     {% endif %}
                 </div>
-                <div class="report-card prose prose-invert max-w-none p-5 rounded-lg overflow-x-auto shadow-lg">
+                <div class="report-card prose max-w-none p-5 rounded-md overflow-x-auto shadow-md">
                     {{ report_html | safe }}
                 </div>
             </div>
-        {% elif processing_message %}
-            <div class="message-info mt-6 p-4 rounded-lg text-sm shadow-lg flex items-center">
-                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                 <p>{{ processing_message }}</p>
-            </div>
         {% endif %}
     </div>
-    <footer class="text-center text-sm footer-text mt-10 pb-4">
-        Developed by @https://github.com/DSLucasHM
+    <footer class="text-center text-sm footer-text mt-12 pb-6">
+        By https://github.com/DSLucasHM
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('research-form');
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const stocksTextarea = document.getElementById('stocks');
+            const submitButton = document.getElementById('generate-report-btn');
+
+            if (form) {
+                form.addEventListener('submit', function(event) {
+                    if (stocksTextarea && stocksTextarea.value.trim() === '') {
+                        return;
+                    }
+                    if (loadingOverlay) {
+                        loadingOverlay.style.opacity = '0';
+                        loadingOverlay.style.display = 'flex';
+                        setTimeout(() => { loadingOverlay.style.opacity = '1'; }, 10);
+                    }
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Processing...';
+                    }
+                });
+            }
+
+            const isProcessing = {{ processing_message | tojson | safe }};
+            const reportExists = {{ report_html | tojson | safe }};
+            const errorExists = {{ error_message | tojson | safe }};
+
+            if (loadingOverlay) {
+                if (isProcessing && !reportExists && !errorExists) {
+                    loadingOverlay.style.opacity = '0';
+                    loadingOverlay.style.display = 'flex';
+                    setTimeout(() => { loadingOverlay.style.opacity = '1'; }, 10);
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Processing...';
+                    }
+                } else {
+                    loadingOverlay.style.display = 'none';
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Generate Report';
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
 

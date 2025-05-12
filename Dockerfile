@@ -27,9 +27,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the src directory to /app/src
 COPY src/ /app/src/
 
-# Copy other necessary root-level files to /app (like .env_example)
-# If .env_example was provided by the user, it will be at /home/ubuntu/upload/.env_example
-COPY .env_example /app/
 
 # Ensure that the 'app' user owns the application files
 # The /app/src/app/reports/ directory will be created by src/app/main.py
