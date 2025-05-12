@@ -14,6 +14,8 @@ This project performs stock research and generates detailed reports. Reports can
 
 ### 📚 About the Project
 
+This AI-powered stock research engine uses LangChain, LangGraph, and OpenAI models for in-depth analysis. It leverages Tavily for targeted web searches and Pydantic for data integrity, processing stock symbols through an agentic workflow to generate comprehensive financial reports. The system excels at automated, data-driven research and narrative creation, highlighting its advanced AI capabilities.
+
 ---
 
 The system leverages the GPT-4o Mini model throughout the entire process. Its performance can be enhanced through various strategies such as:
@@ -73,6 +75,41 @@ Feel free to improve the prompt, customize the process, and reach out if you hav
 - **Report Download:** Allows downloading the original report in Markdown.
 - **Responsive Design:** Adapted for both desktop and mobile devices.
 
+
+### 🚀 Cloning the Repository
+
+1. **📁 Initialize Git**  
+   In the root directory of your project, initialize Git:
+   ```bash
+   git init
+   ```
+
+2. **🔄 Clone the Repository**  
+   Clone this repository into your machine:
+   ```bash
+   git clone https://github.com/DSLucasHM/AI_StockAnalyst.git
+   ```
+
+3. **📂 Navigate to the Project Folder**  
+   Move into the cloned project directory:
+   ```bash
+   cd capture-lead
+   ```
+
+4. **⚙️ Set Up Environment Variables**  
+   Create a `.env` file from the provided example:
+   ```bash
+   cp .env.example .env
+   ```
+
+5. **🔑 Add Your API Keys**  
+   Open the `.env` file and set your API keys:
+   ```bash
+   TAVILY_API_KEY=your_tavily_key      # https://app.tavily.com/home
+   LANGCHAIN_API_KEY=your_langchain_key  # https://smith.langchain.com/settings
+   OPENAI_API_KEY=your_openai_key     # https://platform.openai.com/api-keys
+   ```
+
 ### 🐳 How to Run with Docker (Recommended)
 
 ---
@@ -84,7 +121,7 @@ Feel free to improve the prompt, customize the process, and reach out if you hav
    ```
 
 2. **Run the Docker Container:**
-   Make sure you have a `.env` file in the root of the project (`stock_analyst`) with your API keys.
+   Make sure you have a `.env` file in the root of the project with your API keys.
    ```bash
    docker run -p 5000:5000 -v "$(pwd)/src/app/reports:/app/src/app/reports" --env-file .env stock_analyst
    ```
@@ -114,17 +151,15 @@ Feel free to improve the prompt, customize the process, and reach out if you hav
    pip install -r requirements.txt
    ```
 
-3. **Set Up Environment Variables:**
-   Copy `.env_example` to `.env` and fill in the API keys.
 
-4. **Run the Flask Application:**
+3. **Run the Flask Application:**
    The `PYTHONPATH` should include the project's root directory so that `from src...` works. `src/app/main.py` tries to adjust `sys.path` for this.
    From the root directory :
    ```bash
    python src/app/main.py
    ```
 
-5. **Access the Application:**
+4. **Access the Application:**
    Open your browser and go to `http://localhost:5000`.
 
 ### ⚠️ Considerations
@@ -141,6 +176,16 @@ Feel free to improve the prompt, customize the process, and reach out if you hav
 - Additional analysis methods
 - Performance optimizations
 - User authentication system
+
+
+- Implementing Tavily url limitations
+- Improving prompt engineering
+- Adding new analytical steps or virtual analysts
+- Using SLMs (Small Language Models) to reduce costs
+- Implementing LLM routing and other advanced techniques
+
+Feel free to improve the prompt, customize the process, and reach out if you have any questions or suggestions.
+
 
 ### 🔗 References
 
