@@ -88,7 +88,7 @@ Feel free to improve the prompt, customize the process, and reach out if you hav
 2. **📂 Navigate to the Project Folder**  
    Move into the cloned project directory:
    ```bash
-   cd capture-lead
+   cd AI_StockAnalyst
    ```
 
 3. **⚙️ Set Up Environment Variables**  
