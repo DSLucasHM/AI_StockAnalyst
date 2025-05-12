@@ -34,6 +34,7 @@ This project performs stock research and generates detailed reports. It has been
   │   │   ├── nodes.py
   │   │   └── state.py
   │   ├── utils/                           
+  │   │   ├── __init__.py      
   │   │   └── search.py
   │   └── retriever/                      
   │       ├── __init__.py
@@ -42,19 +43,19 @@ This project performs stock research and generates detailed reports. It has been
   ├── requirements.txt
   ├── .gitignore
   ├── README.md                           
-  └── .env_example  
+  └── .env_example
 ```
 
 ## How to Run with Docker (Recommended)
 
 1.  **Build the Docker Image:**
-    In the project's root directory (`stock_research_app_v3_corrected`), run:
+    In the project's root directory (`stock_analyst`), run:
     ```bash
     docker build -t stock-research-app-final .
     ```
 
 2.  **Run the Docker Container:**
-    Make sure you have a `.env` file in the root of the project (`stock_research_app_v3_corrected`) with your API keys.
+    Make sure you have a `.env` file in the root of the project (`stock_analyst`) with your API keys.
     ```bash
     docker run -p 5000:5000 -v "$(pwd)/src/app/reports:/app/src/app/reports" --env-file .env stock-research-app-final
     ```
@@ -70,7 +71,7 @@ This project performs stock research and generates detailed reports. It has been
 ## How to Run Locally for Development (Without Docker)
 
 1.  **Create and Activate a Virtual Environment:**
-    In the root directory (`stock_research_app_v3_corrected`):
+    In the root directory (`stock_analyst`):
     ```bash
     python3 -m venv venv
     source venv/bin/activate  # Linux/macOS
@@ -87,7 +88,7 @@ This project performs stock research and generates detailed reports. It has been
 
 4.  **Run the Flask Application:**
     The `PYTHONPATH` should include the project's root directory so that `from src...` works. `src/app/main.py` tries to adjust `sys.path` for this.
-    From the root directory (`stock_research_app_v3_corrected`):
+    From the root directory (`stock_analyst`):
     ```bash
     python src/app/main.py
     ```
@@ -97,6 +98,11 @@ This project performs stock research and generates detailed reports. It has been
 
 ## Considerations
 
--   **API Keys:** Essential for operation, set them in the `.env` file (e.g., `TAVILY_API_KEY`, `OPENAI_API_KEY`, `GROQ_API_KEY`).
+-   **API Keys:** Essential for operation, set them in the `.env` file (e.g., `TAVILY_API_KEY`, `OPENAI_API_KEY`).
 -   **Synchronous Processing:** Report generation is synchronous.
 -   **Docker Validation:** Due to limitations in the AI development environment, Docker build and execution could not be tested directly. It is recommended that users test these steps in their local environment.
+
+
+Referencess:
+https://scoras.com
+https://tavily.com
