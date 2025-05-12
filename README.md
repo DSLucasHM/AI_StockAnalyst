@@ -14,21 +14,10 @@ This project performs stock research and generates detailed reports. Reports can
 
 ### 📚 About the Project
 
-This AI-powered stock analysis system simulates in-depth conversations between virtual financial analysts. Each stock is explored through dialogues with a domain specialist connected to real-time web data and a geopolitical expert assessing global risk factors. The result is a detailed, context-rich financial report built entirely by collaborative AI agents.
+This AI-powered stock analysis system simulates in-depth conversations between virtual financial analysts. Each stock is investigated through dialogue with a domain specialist connected to real-time web data and a geopolitical expert assessing global risk factors. The result is a detailed, context-rich financial report generated entirely by collaborative AI agents.
 
-Technically, the system leverages LangChain, LangGraph, and OpenAI models to coordinate a multi-agent workflow. Tavily powers targeted web searches, while Pydantic ensures data integrity throughout. The architecture is modular, scalable, and optimized for automated, data-driven research and narrative generation.
+Technically, the system leverages LangChain, LangGraph, and OpenAI models to orchestrate a multi-agent workflow. Tavily enables targeted web searches, while Pydantic ensures data integrity. The architecture is modular, scalable, and optimized for automated, data-driven research and narrative generation. GPT-4o Mini and Tavily API power the entire process from start to finish.
 
----
-
-The system leverages the GPT-4o Mini model throughout the entire process. Its performance can be enhanced through various strategies such as:
-
-- Implementing Tavily url limitations
-- Improving prompt engineering
-- Adding new analytical steps or virtual analysts
-- Using SLMs (Small Language Models) to reduce costs
-- Implementing LLM routing and other advanced techniques
-
-Feel free to improve the prompt, customize the process, and reach out if you have any questions or suggestions.
 
 ### 🗂️ Project Structure
 
