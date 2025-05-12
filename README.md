@@ -78,31 +78,26 @@ Feel free to improve the prompt, customize the process, and reach out if you hav
 
 ### 🚀 Cloning the Repository
 
-1. **📁 Initialize Git**  
-   In the root directory of your project, initialize Git:
-   ```bash
-   git init
-   ```
 
-2. **🔄 Clone the Repository**  
+1. **🔄 Clone the Repository**  
    Clone this repository into your machine:
    ```bash
    git clone https://github.com/DSLucasHM/AI_StockAnalyst.git
    ```
 
-3. **📂 Navigate to the Project Folder**  
+2. **📂 Navigate to the Project Folder**  
    Move into the cloned project directory:
    ```bash
    cd capture-lead
    ```
 
-4. **⚙️ Set Up Environment Variables**  
+3. **⚙️ Set Up Environment Variables**  
    Create a `.env` file from the provided example:
    ```bash
    cp .env.example .env
    ```
 
-5. **🔑 Add Your API Keys**  
+4. **🔑 Add Your API Keys**  
    Open the `.env` file and set your API keys:
    ```bash
    TAVILY_API_KEY=your_tavily_key      # https://app.tavily.com/home
